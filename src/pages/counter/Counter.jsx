@@ -34,7 +34,7 @@ export const Counter = () => {
     // 전역 상태 가져오기 => useSelector
     // 전역 상태 바꾸기 => useDispatch
     // const {state} = useCounter
-    const { history } = useSelector((state) => state);
+    const { history } = useSelector((state) => state.count);
     
     const dispatch = useDispatch();
 
@@ -49,7 +49,7 @@ export const Counter = () => {
             }
         }
         fetchData()
-    }, [dispatch])
+    }, [])
 
     //type : "INCREMENT" | "DECREMENT" | "RESET"
     const handleDispatch = async (type, newValue) => {
