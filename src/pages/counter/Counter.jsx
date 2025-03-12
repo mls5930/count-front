@@ -1,23 +1,25 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { getHistory, getInit } from "./getData";
-import { INCREMENT, DECREMENT, SETDATA } from "../../store/counterReducer"
+import { COUNTER_INCREMENT, COUNTER_DECREMENT, COUNTER_SETDATA } from "../../reducers/counterReducer"
 import { getCount, postCount } from "../../api/counter";
 
+
+
 const Left = ({handleDispatch}) => {
-    const { count } = useSelector((state) => state);
+    const { count } = useSelector((state) => state.count);
 
     return (
         <>
             {count}
-            <button onClick={() => handleDispatch(INCREMENT, count + 1)}>+</button>
-            <button onClick={() => handleDispatch(DECREMENT, count - 1)}>-</button>
+            <button onClick={() => handleDispatch(COUNTER_INCREMENT, count + 1)}>+</button>
+            <button onClick={() => handleDispatch(COUNTER_DECREMENT, count - 1)}>-</button>
         </>
     )
 }
 
 const Right = () => {
-    const { history } = useSelector((state) => state);
+    const { history } = useSelector((state) => state.count);
     return (
         <ul>
             {history.map((value) => (
@@ -33,7 +35,7 @@ export const Counter = () => {
     // 전역 상태 가져오기 => useSelector
     // 전역 상태 바꾸기 => useDispatch
     // const {state} = useCounter
-    const { history } = useSelector((state) => state);
+    const { history } = useSelector((state) => state.count);
     const dispatch = useDispatch();
 
     // 초기값
@@ -41,7 +43,7 @@ export const Counter = () => {
         const fetchData = async() => {
             try {
                 const data = await getInit();
-                dispatch({ type: SETDATA, payload: data });
+                dispatch({ type: COUNTER_SETDATA, payload: data });
             } catch (error) {
                 console.error("초기 데이터 로딩 실패", error);
             }
