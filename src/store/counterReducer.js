@@ -21,10 +21,10 @@ export const countReducer = (state = init, action) => {
         case DECREMENT:
             return {...state, ...action.payload} 
         case RESET: 
-            return {...state ,...init}
-            // return {count:0,  history: []}
+            // return {...state ,...init}
+            return {count:0,  history: []}
         default:
-            return {...state} 
+            return state 
     }
 };
 // const obj1 = { a: 1, b: 2 };

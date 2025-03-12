@@ -2,9 +2,8 @@
 import {createStore} from "redux"
 import { countReducer } from "./counterReducer";
 
-const store = createStore(countReducer)
+export const store = createStore(countReducer)
 
-export { store }
 
 /*
     전역 환경 만드는거 어렵지 않음
